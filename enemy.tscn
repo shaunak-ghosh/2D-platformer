@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://enemy.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/mixkit-human-eating-tasty-food-with-mouth-open-114.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Sprites/Enemy/slime.png" type="Texture" id=13]
+
+[sub_resource type="Animation" id=8]
+resource_name = "Die"
+length = 0.42
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1.03526, 1, 1 ),
+"update": 1,
+"values": [ 28, 29, 30, 31, 32 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Move"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.25, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1.03526, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9, 10, 11, 12, 3 ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 6, 5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 5, 6 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 7, 6.5 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 1.75, 5 )
+
+[node name="Enemy" type="KinematicBody2D"]
+position = Vector2( 110, 50 )
+collision_layer = 16
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -2.25, -0.250001 )
+scale = Vector2( 0.796875, 0.796875 )
+texture = ExtResource( 13 )
+hframes = 7
+vframes = 5
+frame = 28
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Die = SubResource( 8 )
+anims/Move = SubResource( 7 )
+
+[node name="Collision_main" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -2, 0 )
+rotation = 1.5708
+shape = SubResource( 6 )
+
+[node name="floor_checker" type="RayCast2D" parent="."]
+light_mask = 2
+enabled = true
+cast_to = Vector2( 0, 15 )
+collision_mask = 2
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( -1, 0 )
+shape = SubResource( 4 )
+
+[node name="Sides_checker" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+
+[node name="collision_sides" type="CollisionShape2D" parent="Sides_checker"]
+position = Vector2( -2, 0 )
+shape = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Die_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+
+[node name="Backhurtbox" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Backhurtbox"]
+position = Vector2( -8.25, 0 )
+shape = SubResource( 9 )
+
+[node name="Knockback_Timer" type="Timer" parent="."]
+wait_time = 0.06
+one_shot = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="body_entered" from="Sides_checker" to="." method="_on_Sides_checker_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="area_entered" from="Backhurtbox" to="." method="_on_Backhurtbox_area_entered"]
+[connection signal="timeout" from="Knockback_Timer" to="." method="_on_Knockback_Timer_timeout"]

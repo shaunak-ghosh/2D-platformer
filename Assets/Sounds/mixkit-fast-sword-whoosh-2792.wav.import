@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mixkit-fast-sword-whoosh-2792.wav-be50a72c70d023e8ee111c9e748e5249.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/mixkit-fast-sword-whoosh-2792.wav"
+dest_files=[ "res://.import/mixkit-fast-sword-whoosh-2792.wav-be50a72c70d023e8ee111c9e748e5249.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/retro-video-game-coin-pickup-38299.ogg-b1c5f00b375ecc7f4bca11ba42e86615.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/retro-video-game-coin-pickup-38299.ogg"
+dest_files=[ "res://.import/retro-video-game-coin-pickup-38299.ogg-b1c5f00b375ecc7f4bca11ba42e86615.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

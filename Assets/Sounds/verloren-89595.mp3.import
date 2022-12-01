@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/verloren-89595.mp3-e50c2cb5b78194670641207d28b3b0b9.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/verloren-89595.mp3"
+dest_files=[ "res://.import/verloren-89595.mp3-e50c2cb5b78194670641207d28b3b0b9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
