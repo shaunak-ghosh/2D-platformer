@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Assets/Tiles/Outer_soil_left.png" type="Texture" id=1]
 [ext_resource path="res://Assets/background/set2_background.png" type="Texture" id=2]
@@ -625,15 +625,6 @@ font_data = ExtResource( 11 )
 [sub_resource type="DynamicFont" id=36]
 font_data = ExtResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=61]
-lifetime_randomness = 1.0
-emission_shape = 2
-emission_box_extents = Vector3( 2000, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( -35, 100, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-
 [node name="Scene" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -790,7 +781,7 @@ position = Vector2( 507, 385 )
 position = Vector2( 291, 411 )
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 36 )]
-position = Vector2( 36, -6 )
+position = Vector2( 199, -31 )
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 36 )]
 position = Vector2( 241, 41 )
@@ -803,7 +794,6 @@ position = Vector2( 202, 63 )
 position = Vector2( 104, 345 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-visible = false
 current = true
 limit_left = -48
 limit_bottom = 560
@@ -815,17 +805,5 @@ smoothing_speed = 6.0
 offset_h = 1.0
 offset_v = -1.0
 drag_margin_right = 0.5
-
-[node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 350, 227 )
-amount = 500
-lifetime = 5.03
-process_material = SubResource( 61 )
-
-[node name="Particles2D2" type="Particles2D" parent="."]
-position = Vector2( 946, 226 )
-amount = 500
-lifetime = 5.03
-process_material = SubResource( 61 )
 
 [connection signal="body_entered" from="Fallzone" to="Player" method="_on_Fallzone_body_entered"]

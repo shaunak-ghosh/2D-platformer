@@ -225,6 +225,7 @@ health = 3
 texture = ExtResource( 19 )
 hframes = 6
 vframes = 5
+frame = 3
 
 [node name="SwordHit" type="Area2D" parent="Sprite"]
 

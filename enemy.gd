@@ -25,9 +25,11 @@ func _physics_process(delta):
 	velocity.x = vel_x*direction
 	
 	if knockback == true:
-		vel_x = vel_x * -1
-	elif knockback == false:
-		vel_x = vel_x * 1
+		velocity.y = -329*0.5
+		if $Sprite.flip_h == true:
+			velocity.x = 300
+		else:
+			velocity.x = -300
 
 	move_and_slide(velocity, Vector2.UP)
 
@@ -40,11 +42,14 @@ func _on_Sides_checker_body_entered(body):
 
 func _on_Hurtbox_area_entered(area):
 	health = health-1
+	knockback = true
+	$Knockback_Timer.start()
 	if health == 0:
 		$Die_Sound.play()
 		$AnimationPlayer.play("Die")
 		direction = 0
 		velocity.y = 0
+		#change collision shape scale here
 		set_collision_layer_bit(4,false)
 		set_collision_mask_bit(0,false)
 		$Hurtbox.set_collision_layer_bit(4,false)
@@ -52,9 +57,7 @@ func _on_Hurtbox_area_entered(area):
 		$Sides_checker.set_collision_layer_bit(4,false)
 		$Sides_checker.set_collision_mask_bit(0,false)
 		$Timer.start()
-	else:
-		knockback = true
-		$Knockback_Timer.start()
+		
 
 func _on_Timer_timeout():
 	queue_free()
@@ -63,4 +66,4 @@ func _on_Backhurtbox_area_entered(area):
 	backhurt = 1
 
 func _on_Knockback_Timer_timeout():
-	vel_x = vel_x * 1
+	knockback = false
